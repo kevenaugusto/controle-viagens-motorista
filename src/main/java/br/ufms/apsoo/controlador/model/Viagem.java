@@ -30,7 +30,7 @@ public class Viagem implements Serializable {
     @Column(name = "ID_MOTORISTA")
     private UUID idMotorista;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinTable(name = "VEICULO", joinColumns = {@JoinColumn(name = "ID_VEICULO", referencedColumnName = "ID")})
     @Column(name = "ID_VEICULO")
     private UUID idVeiculo;
