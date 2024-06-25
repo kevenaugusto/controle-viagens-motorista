@@ -25,15 +25,11 @@ public class Viagem implements Serializable {
     @Column(name = "ID")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "MOTORISTA", joinColumns = {@JoinColumn(name = "ID_MOTORISTA", referencedColumnName = "ID")})
-    @Column(name = "ID_MOTORISTA")
-    private UUID idMotorista;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Motorista motoristaDesignado;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "VEICULO", joinColumns = {@JoinColumn(name = "ID_VEICULO", referencedColumnName = "ID")})
-    @Column(name = "ID_VEICULO")
-    private UUID idVeiculo;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Veiculo veiculoDesignado;
 
     @Column(name = "HORA_INICIAL")
     private Date horaInicial;
@@ -43,5 +39,8 @@ public class Viagem implements Serializable {
 
     @Column(name = "QUILOMETRAGEM_FINAL")
     private int quilometragemFinal;
+
+    @Column(name = "HORA_CRIACAO")
+    private Date horaCriacao;
 
 }
