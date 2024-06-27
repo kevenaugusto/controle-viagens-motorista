@@ -92,10 +92,10 @@ public class MainFrameController implements Initializable {
     private void handleNewDriverButtonAction() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("driver-create-form.fxml"));
-            Stage tripStage = new Stage();
-            tripStage.setScene(new Scene(fxmlLoader.load()));
-            tripStage.setTitle("Motorista"); // TODO: Get title from a properties file
-            tripStage.show();
+            Stage driverStage = new Stage();
+            driverStage.setScene(new Scene(fxmlLoader.load()));
+            driverStage.setTitle("Motorista"); // TODO: Get title from a properties file
+            driverStage.show();
         } catch (Exception e) {
             // TODO: Make following messages parametrizable by a properties file
             Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de motoristas.");
@@ -110,10 +110,10 @@ public class MainFrameController implements Initializable {
     private void handleNewManagerButtonAction() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("manager-create-form.fxml"));
-            Stage tripStage = new Stage();
-            tripStage.setScene(new Scene(fxmlLoader.load()));
-            tripStage.setTitle("Gerente"); // TODO: Get title from a properties file
-            tripStage.show();
+            Stage managerStage = new Stage();
+            managerStage.setScene(new Scene(fxmlLoader.load()));
+            managerStage.setTitle("Gerente"); // TODO: Get title from a properties file
+            managerStage.show();
         } catch (Exception e) {
             // TODO: Make following messages parametrizable by a properties file
             Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de gerentes.");
@@ -128,10 +128,10 @@ public class MainFrameController implements Initializable {
     private void handleNewVehicleButtonAction() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("vehicle-create-form.fxml"));
-            Stage tripStage = new Stage();
-            tripStage.setScene(new Scene(fxmlLoader.load()));
-            tripStage.setTitle("Veículo"); // TODO: Get title from a properties file
-            tripStage.show();
+            Stage vehicleStage = new Stage();
+            vehicleStage.setScene(new Scene(fxmlLoader.load()));
+            vehicleStage.setTitle("Veículo"); // TODO: Get title from a properties file
+            vehicleStage.show();
         } catch (Exception e) {
             // TODO: Make following messages parametrizable by a properties file
             Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de veículos.");
