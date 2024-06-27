@@ -16,7 +16,7 @@ public class SearchVehicleController implements Initializable {
     private static final String MARCA = "Marca";
     private static final String MODELO = "Modelo";
     private static final String PLACA = "Placa";
-    private static final String EMPTY = "";
+    public static final String EMPTY = "";
 
     @FXML private TableView<Veiculo> vehicleTableView;
     @FXML private TableColumn<Veiculo, String> marcaTableColumn;
