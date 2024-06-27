@@ -127,4 +127,21 @@ public class MainFrameController implements Initializable {
         }
     }
 
+    public static void startMainFrame() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("main-frame.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Controlador de Viagens");
+            mainStage.setScene(new Scene(fxmlLoader.load()));
+            mainStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Não foi possível iniciar a janela principal.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro crítico");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
 }

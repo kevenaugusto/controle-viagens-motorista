@@ -1,23 +1,14 @@
 package br.ufms.apsoo.controlador;
 
-import br.ufms.apsoo.controlador.model.Motorista;
-import br.ufms.apsoo.controlador.model.Veiculo;
-import br.ufms.apsoo.controlador.model.Viagem;
+import br.ufms.apsoo.controlador.controller.MainFrameController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Date;
-
-import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
 public class ControladorApplication extends Application {
     public static final String PERSISTENCE_UNIT_NAME = "br.ufms.apsoo.controlador";
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
 //        try (var factory = createEntityManagerFactory(PERSISTENCE_UNIT_NAME)) {
 //            var entityManager = factory.createEntityManager();
 //            var transaction = entityManager.getTransaction();
@@ -38,12 +29,7 @@ public class ControladorApplication extends Application {
 //                entityManager.close();
 //            }
 //        }
-
-        FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("main-frame.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        MainFrameController.startMainFrame();
     }
 
     public static void main(String[] args) {
