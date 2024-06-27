@@ -44,12 +44,17 @@ public class SceneBuilder {
     }
 
     public static void startSearchDriverForm() {
+        startSearchDriverForm(false);
+    }
+
+    public static void startSearchDriverForm(boolean showAndWait) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("driver-search-form.fxml"));
             Stage vehicleStage = new Stage();
             vehicleStage.setScene(new Scene(fxmlLoader.load()));
             vehicleStage.setTitle("Pesquisar Motorista"); // TODO: Get title from a properties file
-            vehicleStage.show();
+            if (showAndWait) vehicleStage.showAndWait();
+            else vehicleStage.show();
         } catch (Exception e) {
             // TODO: Make following messages parametrizable by a properties file
             Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de pesquisa por motoristas.");
@@ -61,12 +66,17 @@ public class SceneBuilder {
     }
 
     public static void startSearchVehicleForm() {
+        startSearchVehicleForm(false);
+    }
+
+    public static void startSearchVehicleForm(boolean showAndWait) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("vehicle-search-form.fxml"));
             Stage vehicleStage = new Stage();
             vehicleStage.setScene(new Scene(fxmlLoader.load()));
             vehicleStage.setTitle("Veículo"); // TODO: Get title from a properties file
-            vehicleStage.show();
+            if (showAndWait) vehicleStage.showAndWait();
+            else vehicleStage.show();
         } catch (Exception e) {
             // TODO: Make following messages parametrizable by a properties file
             Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de pesquisa de veículos.");

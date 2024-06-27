@@ -63,7 +63,7 @@ public class TripFrameController implements Initializable {
     @FXML
     private void handleSelectDriverButtonAction() {
         MotoristaSingleton.setFromTripForm(true);
-        SceneBuilder.startSearchDriverForm();
+        SceneBuilder.startSearchDriverForm(true);
         if (MotoristaSingleton.isMotorista()) {
             viagem.setMotoristaDesignado(MotoristaSingleton.getMotorista());
             MotoristaSingleton.clearMotorista();
@@ -75,7 +75,7 @@ public class TripFrameController implements Initializable {
     @FXML
     private void handleSelectVehicleButtonAction() {
         VeiculoSingleton.setFromTripForm(true);
-        SceneBuilder.startSearchVehicleForm();
+        SceneBuilder.startSearchVehicleForm(true);
         if (VeiculoSingleton.isVeiculo()) {
             viagem.setVeiculoDesignado(VeiculoSingleton.getVeiculo());
             VeiculoSingleton.clearVeiculo();
