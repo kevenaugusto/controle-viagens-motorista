@@ -1,4 +1,4 @@
-package br.ufms.apsoo.controlador;
+package br.ufms.apsoo.controlador.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
