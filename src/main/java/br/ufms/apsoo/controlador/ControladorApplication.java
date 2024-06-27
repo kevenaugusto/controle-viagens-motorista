@@ -18,26 +18,26 @@ public class ControladorApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        try (var factory = createEntityManagerFactory(PERSISTENCE_UNIT_NAME)) {
-            var entityManager = factory.createEntityManager();
-            var transaction = entityManager.getTransaction();
-            //noinspection TryFinallyCanBeTryWithResources
-            try {
-                var motorista = new Motorista(null, "José da Silva", "9 1234-5678", "123.456.789-00", new Date());
-                var veiculo = new Veiculo(null, "Fiat", "Uno", "HSU-3E53", 18500);
-                var viagem = new Viagem(null, motorista, veiculo, "Rua dos Bobos, nº 0", null, null, 0, new Date());
-                transaction.begin();
-                entityManager.persist(motorista);
-                entityManager.persist(veiculo);
-                entityManager.persist(viagem);
-                transaction.commit();
-            } catch (Exception error) {
-                if (transaction.isActive()) transaction.rollback();
-                throw error;
-            } finally {
-                entityManager.close();
-            }
-        }
+//        try (var factory = createEntityManagerFactory(PERSISTENCE_UNIT_NAME)) {
+//            var entityManager = factory.createEntityManager();
+//            var transaction = entityManager.getTransaction();
+//            //noinspection TryFinallyCanBeTryWithResources
+//            try {
+//                var motorista = new Motorista(null, "José da Silva", "9 1234-5678", "123.456.789-00", new Date());
+//                var veiculo = new Veiculo(null, "Fiat", "Uno", "HSU-3E53", 18500);
+//                var viagem = new Viagem(null, motorista, veiculo, "Rua dos Bobos, nº 0", null, null, 0, new Date());
+//                transaction.begin();
+//                entityManager.persist(motorista);
+//                entityManager.persist(veiculo);
+//                entityManager.persist(viagem);
+//                transaction.commit();
+//            } catch (Exception error) {
+//                if (transaction.isActive()) transaction.rollback();
+//                throw error;
+//            } finally {
+//                entityManager.close();
+//            }
+//        }
 
         FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("main-frame.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
