@@ -73,7 +73,7 @@
                 <Menu mnemonicParsing="false" text="Motoristas">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleNewDriverButtonAction" text="Novo Motorista" />
-                        <MenuItem mnemonicParsing="false" text="Pesquisar Motorista" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSearchDriverButtonAction" text="Pesquisar Motorista" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Motorista" />
                         <MenuItem mnemonicParsing="false" text="Exportar Motorista" />
@@ -93,7 +93,7 @@
                 <Menu mnemonicParsing="false" text="Veículos">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleNewVehicleButtonAction" text="Novo Veículo" />
-                        <MenuItem mnemonicParsing="false" text="Pesquisar Veículo" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSearchVehicleButtonAction" text="Pesquisar Veículo" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Veículo" />
                         <MenuItem mnemonicParsing="false" text="Exportar Veículo" />
