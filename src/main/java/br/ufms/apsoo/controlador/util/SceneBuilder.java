@@ -138,6 +138,23 @@ public class SceneBuilder {
         }
     }
 
+    public static void startNewUserForm() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("user-create-form.fxml"));
+            Stage managerStage = new Stage();
+            managerStage.setScene(new Scene(fxmlLoader.load()));
+            managerStage.setTitle("Usuário"); // TODO: Get title from a properties file
+            managerStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de usuários.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
     public static void startMainFrame() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("main-frame.fxml"));

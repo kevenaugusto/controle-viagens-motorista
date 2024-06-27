@@ -61,7 +61,7 @@
                 </Menu>
             <Menu mnemonicParsing="false" text="Usuários">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleNewManagerButtonAction" text="Novo Usuário" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleNewUserButtonAction" text="Novo Usuário" />
                   <MenuItem mnemonicParsing="false" text="Pesquisar Usuário" />
                </items>
             </Menu>

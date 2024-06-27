@@ -75,6 +75,11 @@ public class MainFrameController implements Initializable {
     }
 
     @FXML
+    private void handleNewUserButtonAction() {
+        SceneBuilder.startNewUserForm();
+    }
+
+    @FXML
     private void handleNewVehicleButtonAction() {
         SceneBuilder.startVehicleCreateForm();
     }
