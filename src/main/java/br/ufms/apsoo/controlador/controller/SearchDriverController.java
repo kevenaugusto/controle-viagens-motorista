@@ -2,13 +2,12 @@ package br.ufms.apsoo.controlador.controller;
 
 import br.ufms.apsoo.controlador.model.Motorista;
 import br.ufms.apsoo.controlador.service.SearchDriverService;
+import br.ufms.apsoo.controlador.singleton.MotoristaSingleton;
+import br.ufms.apsoo.controlador.util.SceneBuilder;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -68,5 +67,18 @@ public class SearchDriverController implements Initializable {
                 driverTextField.setText(EMPTY);
             }
         });
+
+        driverTableView.setRowFactory(motoristaTableView -> {
+            TableRow<Motorista> tableRow = new TableRow<>();
+            tableRow.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getClickCount() == 2 && !tableRow.isEmpty()) {
+                    MotoristaSingleton.setMotorista(tableRow.getItem());
+                    SceneBuilder.startDriverCreateForm();
+                    driverTableView.getScene().getWindow().hide();
+                }
+            });
+            return tableRow;
+        });
     }
+
 }

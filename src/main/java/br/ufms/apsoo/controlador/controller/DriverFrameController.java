@@ -1,6 +1,8 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.model.Motorista;
 import br.ufms.apsoo.controlador.service.MotoristaService;
+import br.ufms.apsoo.controlador.singleton.MotoristaSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class DriverFrameController implements Initializable {
@@ -29,7 +33,16 @@ public class DriverFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        removeButton.setDisable(true);
+        if (MotoristaSingleton.isMotorista()) {
+            Motorista motorista = MotoristaSingleton.getMotorista();
+            nomeCompletoTextField.setText(motorista.getNomeCompleto());
+            cpfTextField.setText(motorista.getCpf());
+            telefoneTextField.setText(motorista.getTelefone());
+            validadeCnhDatePicker.setValue(LocalDate.ofInstant(motorista.getValidadeCnh().toInstant(), ZoneId.systemDefault()));
+            MotoristaSingleton.clearMotorista();
+        } else {
+            removeButton.setDisable(true);
+        }
     }
 
     @FXML

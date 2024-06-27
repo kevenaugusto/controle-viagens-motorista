@@ -7,6 +7,7 @@ import br.ufms.apsoo.controlador.model.Viagem;
 import br.ufms.apsoo.controlador.service.MotoristaService;
 import br.ufms.apsoo.controlador.service.VeiculoService;
 import br.ufms.apsoo.controlador.service.ViagemService;
+import br.ufms.apsoo.controlador.util.SceneBuilder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -90,20 +91,7 @@ public class MainFrameController implements Initializable {
 
     @FXML
     private void handleNewDriverButtonAction() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("driver-create-form.fxml"));
-            Stage driverStage = new Stage();
-            driverStage.setScene(new Scene(fxmlLoader.load()));
-            driverStage.setTitle("Motorista"); // TODO: Get title from a properties file
-            driverStage.show();
-        } catch (Exception e) {
-            // TODO: Make following messages parametrizable by a properties file
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de motoristas.");
-            errorAlert.setHeaderText("Erro!");
-            errorAlert.setTitle("Erro interno");
-            errorAlert.showAndWait();
-            e.printStackTrace(); // TODO: Change for SLF4J implementation
-        }
+        SceneBuilder.startDriverCreateForm();
     }
 
     @FXML

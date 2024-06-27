@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @Table(name = "MOTORISTA")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
