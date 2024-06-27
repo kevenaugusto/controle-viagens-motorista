@@ -77,6 +77,23 @@ public class SceneBuilder {
         }
     }
 
+    public static void startSearchTripForm() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("trip-search-form.fxml"));
+            Stage vehicleStage = new Stage();
+            vehicleStage.setScene(new Scene(fxmlLoader.load()));
+            vehicleStage.setTitle("Viagem"); // TODO: Get title from a properties file
+            vehicleStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de pesquisa de viagens.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
     public static void startNewTripFrom() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("trip-create-form.fxml"));

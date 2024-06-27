@@ -4,6 +4,7 @@ import br.ufms.apsoo.controlador.model.Viagem;
 import br.ufms.apsoo.controlador.service.ViagemService;
 import br.ufms.apsoo.controlador.singleton.MotoristaSingleton;
 import br.ufms.apsoo.controlador.singleton.VeiculoSingleton;
+import br.ufms.apsoo.controlador.singleton.ViagemSingleton;
 import br.ufms.apsoo.controlador.util.SceneBuilder;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TripFrameController implements Initializable {
@@ -39,9 +41,23 @@ public class TripFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        removeButton.setDisable(true);
-        startTripButton.setDisable(true);
-        endTripButton.setDisable(true);
+        if (ViagemSingleton.isViagem()) {
+            var viagemRecovered = ViagemSingleton.getViagem();
+            viagem.setMotoristaDesignado(viagemRecovered.getMotoristaDesignado());
+            viagem.setVeiculoDesignado(viagemRecovered.getVeiculoDesignado());
+            motoristaTextField.setText(viagemRecovered.getMotoristaDesignado().getNomeCompleto());
+            veiculoTextField.setText(viagemRecovered.getVeiculoDesignado().getModelo() + "/" + viagemRecovered.getVeiculoDesignado().getPlaca());
+            destinoViagemTextField.setText(viagemRecovered.getDestino());
+            Date horaInicial = viagemRecovered.getHoraInicial();
+            if (horaInicial != null) horarioInicioTextField.setText(horaInicial.toString());
+            Date horaFinal = viagemRecovered.getHoraFinal();
+            if (horaFinal != null) horarioTerminoTextField.setText(horaFinal.toString());
+            ViagemSingleton.clearViagem();
+        } else {
+            removeButton.setDisable(true);
+            startTripButton.setDisable(true);
+            endTripButton.setDisable(true);
+        }
     }
 
     @FXML

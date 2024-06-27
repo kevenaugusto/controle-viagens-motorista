@@ -27,10 +27,10 @@ public class Viagem implements Serializable {
     @Column(name = "ID")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Motorista motoristaDesignado;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Veiculo veiculoDesignado;
 
     @Column(name = "DESTINO")
