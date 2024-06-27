@@ -27,6 +27,22 @@ public class MotoristaRepository implements Closeable {
         return optionalMotoristas.orElse(new ArrayList<>());
     }
 
+    public void saveMotorista(Motorista motoristaToBeSaved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(motoristaToBeSaved);
+                transaction.commit();
+            } catch (Exception error) {
+                if (transaction.isActive()) transaction.rollback();
+                throw error;
+            } finally {
+                entityManager.close();
+            }
+        }
+    }
+
     @Override
     public void close() {
         this.entityManagerFactory.close();
