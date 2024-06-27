@@ -68,7 +68,7 @@
             <Menu mnemonicParsing="false" text="Gerentes">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleNewManagerButtonAction" text="Novo Gerente" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar Gerente" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSearchManagerButtonAction" text="Pesquisar Gerente" />
                </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="Motoristas">

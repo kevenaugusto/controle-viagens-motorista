@@ -1,6 +1,8 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.model.Gerente;
 import br.ufms.apsoo.controlador.service.ManagerService;
+import br.ufms.apsoo.controlador.singleton.ManagerSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class ManagerFrameController implements Initializable {
@@ -29,7 +33,16 @@ public class ManagerFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        removeButton.setDisable(true);
+        if (ManagerSingleton.isGerente()) {
+            Gerente gerente = ManagerSingleton.getGerente();
+            managerNameTextField.setText(gerente.getNomeCompleto());
+            managerCpfTextField.setText(gerente.getCpf());
+            managerTelefoneTextField.setText(gerente.getTelefone());
+            managerValidadeCnhDatePicker.setValue(LocalDate.ofInstant(gerente.getValidadeCnh().toInstant(), ZoneId.systemDefault()));
+            ManagerSingleton.clearGerente();
+        } else {
+            removeButton.setDisable(true);
+        }
     }
 
     @FXML
