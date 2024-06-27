@@ -4,7 +4,6 @@ import br.ufms.apsoo.controlador.model.Viagem;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,22 @@ public class ViagemRepository implements Closeable {
             optionalViagem = Optional.ofNullable(entityManager.createQuery("from Viagem", Viagem.class).getResultList());
         }
         return optionalViagem.orElse(new ArrayList<>());
+    }
+
+    public void saveViagem(Viagem viagemToBeSaved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(viagemToBeSaved);
+                transaction.commit();
+            } catch (Exception error) {
+                if (transaction.isActive()) transaction.rollback();
+                throw error;
+            } finally {
+                entityManager.close();
+            }
+        }
     }
 
     @Override
