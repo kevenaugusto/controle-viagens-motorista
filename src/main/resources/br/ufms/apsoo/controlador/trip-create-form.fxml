@@ -1,63 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="tripPanel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufms.apsoo.controlador.controller.TripFrameController">
+<VBox fx:id="tripPanel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="400.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufms.apsoo.controlador.controller.TripFrameController">
     <children>
-        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="133.0" text="Motorista Designado" />
-                <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
-                <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="18.0" prefWidth="133.0" text="Motorista Designado"/>
+                <TextField fx:id="motoristaTextField" disable="true" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
+                <Button fx:id="selecionarMotoristaButton" mnemonicParsing="false"
+                        onAction="#handleSelectDriverButtonAction" text="Selecionar">
+                    <HBox.margin>
+                        <Insets left="3.0"/>
+                    </HBox.margin>
+                </Button>
             </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="133.0" text="Veículo Designado" />
-                <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
-                <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="18.0" prefWidth="133.0" text="Veículo Designado"/>
+                <TextField fx:id="veiculoTextField" disable="true" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
+                <Button fx:id="selecionarVeiculoButton" mnemonicParsing="false"
+                        onAction="#handleSelectVehicleButtonAction" text="Selecionar"/>
             </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="133.0" text="Destino da Viagem" />
-                <TextField fx:id="destinoViagemTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
-                <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="18.0" prefWidth="133.0" text="Destino da Viagem"/>
+                <TextField fx:id="destinoViagemTextField" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
             </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="133.0" text="Horário de Início" />
-                <TextField fx:id="horarioInicioTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
-                <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="18.0" prefWidth="133.0" text="Horário de Início"/>
+                <TextField fx:id="horarioInicioTextField" disable="true" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
             </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="133.0" text="Horário de Término" />
-                <TextField fx:id="horarioTerminoTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
-                <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" />
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="18.0" prefWidth="133.0" text="Horário de Término"/>
+                <TextField fx:id="horarioTerminoTextField" disable="true" maxHeight="-Infinity" maxWidth="-Infinity"
+                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
             </children>
         </HBox>
-        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="30.0">
+        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="50.0" prefWidth="558.0" spacing="30.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Salvar" />
-                <Button mnemonicParsing="false" onAction="#closeTripFrame" text="Descartar" />
-                <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleRemoveButtonAction" text="Apagar" />
-                <Button fx:id="startTripButton" layoutX="355.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleStartTripButtonAction" text="Iniciar" />
-                <Button fx:id="endTripButton" layoutX="401.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleEndTripButtonAction" text="Encerrar" />
+                <Button mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Salvar"/>
+                <Button mnemonicParsing="false" onAction="#closeTripFrame" text="Descartar"/>
+                <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleRemoveButtonAction"
+                        text="Apagar"/>
+                <Button fx:id="startTripButton" layoutX="355.0" layoutY="22.0" mnemonicParsing="false"
+                        onAction="#handleStartTripButtonAction" text="Iniciar"/>
+                <Button fx:id="endTripButton" layoutX="401.0" layoutY="22.0" mnemonicParsing="false"
+                        onAction="#handleEndTripButtonAction" text="Encerrar"/>
             </children>
         </HBox>
-        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="558.0" />
     </children>
 </VBox>

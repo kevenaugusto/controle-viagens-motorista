@@ -7,6 +7,7 @@ public final class VeiculoSingleton {
     private static volatile VeiculoSingleton instance;
 
     public Veiculo veiculo;
+    public boolean fromTripForm;
 
     private VeiculoSingleton(Veiculo veiculo) {
         this.veiculo = veiculo;
@@ -39,6 +40,14 @@ public final class VeiculoSingleton {
 
     public static void setVeiculo(Veiculo veiculo) {
         getInstance().veiculo = veiculo;
+    }
+
+    public static boolean isFromTripForm() {
+        return getInstance().fromTripForm;
+    }
+
+    public static void setFromTripForm(boolean fromTripForm) {
+        getInstance().fromTripForm = fromTripForm;
     }
 
 }

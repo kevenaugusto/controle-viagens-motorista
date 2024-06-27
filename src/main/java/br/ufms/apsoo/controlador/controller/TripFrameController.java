@@ -1,6 +1,10 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.model.Viagem;
 import br.ufms.apsoo.controlador.service.ViagemService;
+import br.ufms.apsoo.controlador.singleton.MotoristaSingleton;
+import br.ufms.apsoo.controlador.singleton.VeiculoSingleton;
+import br.ufms.apsoo.controlador.util.SceneBuilder;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -13,18 +17,24 @@ import java.util.ResourceBundle;
 
 public class TripFrameController implements Initializable {
 
+    @FXML private TextField motoristaTextField;
+    @FXML private TextField veiculoTextField;
     @FXML private TextField destinoViagemTextField;
     @FXML private TextField horarioInicioTextField;
     @FXML private TextField horarioTerminoTextField;
+    @FXML private Button selecionarMotoristaButton;
+    @FXML private Button selecionarVeiculoButton;
     @FXML private Button removeButton;
     @FXML private Button startTripButton;
     @FXML private Button endTripButton;
     @FXML private VBox tripPanel;
 
     private final ViagemService viagemService;
+    private final Viagem viagem;
 
     public TripFrameController() {
         this.viagemService = new ViagemService();
+        this.viagem = new Viagem();
     }
 
     @Override
@@ -32,8 +42,30 @@ public class TripFrameController implements Initializable {
         removeButton.setDisable(true);
         startTripButton.setDisable(true);
         endTripButton.setDisable(true);
-        horarioInicioTextField.setDisable(true);
-        horarioTerminoTextField.setDisable(true);
+    }
+
+    @FXML
+    private void handleSelectDriverButtonAction() {
+        MotoristaSingleton.setFromTripForm(true);
+        SceneBuilder.startSearchDriverForm();
+        if (MotoristaSingleton.isMotorista()) {
+            viagem.setMotoristaDesignado(MotoristaSingleton.getMotorista());
+            MotoristaSingleton.clearMotorista();
+            MotoristaSingleton.setFromTripForm(false);
+            motoristaTextField.setText(viagem.getMotoristaDesignado().getNomeCompleto());
+        }
+    }
+
+    @FXML
+    private void handleSelectVehicleButtonAction() {
+        VeiculoSingleton.setFromTripForm(true);
+        SceneBuilder.startSearchVehicleForm();
+        if (VeiculoSingleton.isVeiculo()) {
+            viagem.setVeiculoDesignado(VeiculoSingleton.getVeiculo());
+            VeiculoSingleton.clearVeiculo();
+            VeiculoSingleton.setFromTripForm(false);
+            veiculoTextField.setText(viagem.getVeiculoDesignado().getModelo() + "/" + viagem.getVeiculoDesignado().getPlaca());
+        }
     }
 
     @FXML

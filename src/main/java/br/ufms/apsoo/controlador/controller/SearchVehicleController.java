@@ -72,7 +72,7 @@ public class SearchVehicleController implements Initializable {
             tableRow.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && !tableRow.isEmpty()) {
                     VeiculoSingleton.setVeiculo(tableRow.getItem());
-                    SceneBuilder.startVehicleCreateForm();
+                    if (!VeiculoSingleton.isFromTripForm()) SceneBuilder.startVehicleCreateForm();
                     vehicleTableView.getScene().getWindow().hide();
                 }
             });

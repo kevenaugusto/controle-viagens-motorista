@@ -73,7 +73,7 @@ public class SearchDriverController implements Initializable {
             tableRow.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && !tableRow.isEmpty()) {
                     MotoristaSingleton.setMotorista(tableRow.getItem());
-                    SceneBuilder.startDriverCreateForm();
+                    if (!MotoristaSingleton.isFromTripForm()) SceneBuilder.startDriverCreateForm();
                     driverTableView.getScene().getWindow().hide();
                 }
             });

@@ -7,6 +7,7 @@ public final class MotoristaSingleton {
     private static volatile MotoristaSingleton instance;
 
     public Motorista motorista;
+    public boolean fromTripForm;
 
     private MotoristaSingleton(Motorista motorista) {
         this.motorista = motorista;
@@ -39,6 +40,14 @@ public final class MotoristaSingleton {
 
     public static void setMotorista(Motorista motorista) {
         getInstance().motorista = motorista;
+    }
+
+    public static boolean isFromTripForm() {
+        return getInstance().fromTripForm;
+    }
+
+    public static void setFromTripForm(boolean fromTripForm) {
+        getInstance().fromTripForm = fromTripForm;
     }
 
 }
