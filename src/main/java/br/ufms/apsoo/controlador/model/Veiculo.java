@@ -32,7 +32,14 @@ public class Veiculo implements Serializable {
     @Column(name = "MODELO")
     private String modelo;
 
+    @Column(name = "PLACA")
+    private String placa;
+
     @Column(name = "QUILOMETRAGEM")
     private int quilometragem;
 
+    @Override
+    public String toString() {
+        return modelo + "/" + placa;
+    }
 }

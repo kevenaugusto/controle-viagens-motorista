@@ -33,6 +33,9 @@ public class Viagem implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Veiculo veiculoDesignado;
 
+    @Column(name = "DESTINO")
+    private String destino;
+
     @Column(name = "HORA_INICIAL")
     private Date horaInicial;
 
@@ -45,4 +48,8 @@ public class Viagem implements Serializable {
     @Column(name = "HORA_CRIACAO")
     private Date horaCriacao;
 
+    @Override
+    public String toString() {
+        return destino;
+    }
 }

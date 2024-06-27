@@ -29,4 +29,8 @@ public class Motorista implements Serializable {
     @Column(name = "CARTEIRA_DE_HABILITACAO")
     private String carteiraDeHabilitacao;
 
+    @Override
+    public String toString() {
+        return nomeCompleto;
+    }
 }

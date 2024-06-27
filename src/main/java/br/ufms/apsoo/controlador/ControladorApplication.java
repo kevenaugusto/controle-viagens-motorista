@@ -24,8 +24,8 @@ public class ControladorApplication extends Application {
             //noinspection TryFinallyCanBeTryWithResources
             try {
                 var motorista = new Motorista(null, "José da Silva", "123.456.789-00");
-                var veiculo = new Veiculo(null, "Fiat", "Uno", 18500);
-                var viagem = new Viagem(null, motorista, veiculo, null, null, 0, new Date());
+                var veiculo = new Veiculo(null, "Fiat", "Uno", "HSU-3E53", 18500);
+                var viagem = new Viagem(null, motorista, veiculo, "Rua dos Bobos, nº 0", null, null, 0, new Date());
                 transaction.begin();
                 entityManager.persist(motorista);
                 entityManager.persist(veiculo);
