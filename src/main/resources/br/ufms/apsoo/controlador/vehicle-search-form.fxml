@@ -9,37 +9,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vehiclePanel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufms.apsoo.controlador.controller.SearchVehicleController">
     <children>
         <HBox alignment="CENTER">
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
             <children>
-                <TableView prefHeight="250.0" prefWidth="450.0">
+                <TableView fx:id="vehicleTableView" prefHeight="250.0" prefWidth="450.0">
                     <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0"
-                                     text="Marca"/>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0"
-                                     text="Modelo"/>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0"
-                                     text="Placa"/>
+                        <TableColumn fx:id="marcaTableColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0" text="Marca" />
+                        <TableColumn fx:id="modeloTableColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0" text="Modelo" />
+                        <TableColumn fx:id="placaTableColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0" text="Placa" />
                     </columns>
                 </TableView>
             </children>
         </HBox>
-        <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
+        <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" spacing="15.0">
             <children>
-                <ChoiceBox prefWidth="150.0"/>
-                <TextField fx:id="marcaVeiculoTextField" maxHeight="-Infinity" maxWidth="-Infinity"
-                           minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0"/>
-                <Button mnemonicParsing="false" text="Procurar"/>
+                <ChoiceBox fx:id="vehicleChoiceBox" prefWidth="150.0" />
+                <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="180.0" />
+                <Button disable="true" mnemonicParsing="false" text="Procurar" />
             </children>
             <padding>
-                <Insets top="15.0"/>
+                <Insets top="15.0" />
             </padding>
         </HBox>
     </children>
