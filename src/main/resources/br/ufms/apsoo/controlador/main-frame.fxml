@@ -61,7 +61,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viagens">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Nova Viagem" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleNewTripButtonAction" text="Nova Viagem" />
                         <MenuItem mnemonicParsing="false" text="Pesquisar Viagem" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Viagem" />

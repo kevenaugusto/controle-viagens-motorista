@@ -1,5 +1,6 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.ControladorApplication;
 import br.ufms.apsoo.controlador.model.Motorista;
 import br.ufms.apsoo.controlador.model.Veiculo;
 import br.ufms.apsoo.controlador.model.Viagem;
@@ -8,9 +9,11 @@ import br.ufms.apsoo.controlador.service.VeiculoService;
 import br.ufms.apsoo.controlador.service.ViagemService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -52,4 +55,23 @@ public class MainFrameController implements Initializable {
     private void handleCloseButtonAction(ActionEvent event) {
         mainPanel.getScene().getWindow().hide();
     }
+
+    @FXML
+    private void handleNewTripButtonAction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("trip-create-form.xml"));
+            Stage tripStage = new Stage();
+            tripStage.setScene(new Scene(fxmlLoader.load()));
+            tripStage.setTitle("Viagem"); // TODO: Get title from a properties file
+            tripStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de viagens.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
 }
