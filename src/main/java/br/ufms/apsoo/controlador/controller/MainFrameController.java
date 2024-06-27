@@ -74,4 +74,58 @@ public class MainFrameController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleNewDriverButtonAction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("driver-create-form.fxml"));
+            Stage tripStage = new Stage();
+            tripStage.setScene(new Scene(fxmlLoader.load()));
+            tripStage.setTitle("Motorista"); // TODO: Get title from a properties file
+            tripStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de motoristas.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
+    @FXML
+    private void handleNewManagerButtonAction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("manager-create-form.fxml"));
+            Stage tripStage = new Stage();
+            tripStage.setScene(new Scene(fxmlLoader.load()));
+            tripStage.setTitle("Gerente"); // TODO: Get title from a properties file
+            tripStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de gerentes.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
+    @FXML
+    private void handleNewVehicleButtonAction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("vehicle-create-form.fxml"));
+            Stage tripStage = new Stage();
+            tripStage.setScene(new Scene(fxmlLoader.load()));
+            tripStage.setTitle("Veículo"); // TODO: Get title from a properties file
+            tripStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de veículos.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
 }
