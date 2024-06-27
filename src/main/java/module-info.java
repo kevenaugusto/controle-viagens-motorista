@@ -10,4 +10,6 @@ module br.ufms.apsoo.controlador {
     exports br.ufms.apsoo.controlador;
 
     opens br.ufms.apsoo.controlador.model to org.hibernate.orm.core;
+    exports br.ufms.apsoo.controlador.controller;
+    opens br.ufms.apsoo.controlador.controller to javafx.fxml;
 }
