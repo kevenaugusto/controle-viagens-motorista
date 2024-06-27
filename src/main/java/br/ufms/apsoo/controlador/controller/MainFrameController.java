@@ -45,8 +45,23 @@ public class MainFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        motoristaService.loadMotoristaListView(listViewMotoristas);
+        reloadTrips();
+        reloadDrivers();
+        reloadVehicles();
+    }
+
+    @FXML
+    private void reloadTrips() {
         viagemService.loadViagemListView(listViewViagens);
+    }
+
+    @FXML
+    private void reloadDrivers() {
+        motoristaService.loadMotoristaListView(listViewMotoristas);
+    }
+
+    @FXML
+    private void reloadVehicles() {
         veiculoService.loadMVeiculoListView(listViewVeiculos);
     }
 

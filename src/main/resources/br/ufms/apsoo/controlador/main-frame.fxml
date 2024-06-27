@@ -66,6 +66,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Viagem" />
                         <MenuItem mnemonicParsing="false" text="Exportar Viagem" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#reloadTrips" text="Recarregar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Motoristas">
@@ -75,6 +77,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Motorista" />
                         <MenuItem mnemonicParsing="false" text="Exportar Motorista" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#reloadDrivers" text="Recarregar" />
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="Gerentes">
@@ -93,6 +97,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Importar Veículo" />
                         <MenuItem mnemonicParsing="false" text="Exportar Veículo" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#reloadVehicles" text="Recarregar" />
                     </items>
                 </Menu>
             </menus>
