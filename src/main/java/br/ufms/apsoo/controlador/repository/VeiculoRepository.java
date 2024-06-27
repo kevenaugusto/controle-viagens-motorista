@@ -4,7 +4,6 @@ import br.ufms.apsoo.controlador.model.Veiculo;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,22 @@ public class VeiculoRepository implements Closeable {
             optionalVeiculo = Optional.ofNullable(entityManager.createQuery("from Veiculo", Veiculo.class).getResultList());
         }
         return optionalVeiculo.orElse(new ArrayList<>());
+    }
+
+    public void saveVehicle(Veiculo vehicleToBeSaved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(vehicleToBeSaved);
+                transaction.commit();
+            } catch (Exception error) {
+                if (transaction.isActive()) transaction.rollback();
+                throw error;
+            } finally {
+                entityManager.close();
+            }
+        }
     }
 
     @Override
