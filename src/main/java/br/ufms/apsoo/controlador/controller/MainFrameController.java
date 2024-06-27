@@ -51,7 +51,7 @@ public class MainFrameController implements Initializable {
     }
 
     @FXML
-    private void handleCloseButtonAction() {
+    private void closeMainFrame() {
         mainPanel.getScene().getWindow().hide();
     }
 

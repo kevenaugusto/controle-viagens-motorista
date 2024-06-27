@@ -56,7 +56,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="Trocar de Usuário" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="closeButton" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Sair" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeMainFrame" text="Sair" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viagens">
