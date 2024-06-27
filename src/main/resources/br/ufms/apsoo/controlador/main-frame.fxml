@@ -48,93 +48,114 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="900.0" VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Geral">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Trocar de Usuário" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Sair" />
-          </items>
-        </Menu>
-            <Menu mnemonicParsing="false" text="Viagens">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Nova Viagem" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar Viagem" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Importar Viagem" />
-                  <MenuItem mnemonicParsing="false" text="Exportar Viagem" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Motoristas">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Novo Motorista" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar Motorista" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Importar Motorista" />
-                  <MenuItem mnemonicParsing="false" text="Exportar Motorista" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Veículos">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Novo Veículo" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar Veículo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Importar Veículo" />
-                  <MenuItem mnemonicParsing="false" text="Exportar Veículo" />
-               </items>
-            </Menu>
-      </menus>
-    </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
-      <items>
-            <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
-               <content>
-              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
-                     <children>
-                        <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0" />
-                     </children>
-              </AnchorPane>
-               </content>
-            </ScrollPane>
-        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="440.0">
-          <content>
-            <AnchorPane id="Content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="440.0">
-                     <children>
-                        <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="440.0" />
-                     </children>
-            </AnchorPane>
-          </content>
-        </ScrollPane>
-            <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
-               <content>
-              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
-                     <children>
-                        <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0" />
-                     </children>
-              </AnchorPane>
-               </content>
-            </ScrollPane>
-      </items>
-    </SplitPane>
-    <HBox id="HBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="115.0" spacing="5.0" VBox.vgrow="NEVER">
-      <children>
-        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="56.0" text="Motoristas" HBox.hgrow="ALWAYS">
-          <font>
-            <Font size="11.0" fx:id="x3" />
-          </font>
-          <textFill>
-            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-          </textFill>
-        </Label>
-        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="786.0" HBox.hgrow="ALWAYS" />
-        <Label font="$x3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="43.0" text="Veículos" textFill="$x4" HBox.hgrow="NEVER" />
-      </children>
-      <padding>
-        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-      </padding>
-    </HBox>
-  </children>
+<VBox fx:controller="br.ufms.apsoo.controlador.controller.MainFrameController" alignment="CENTER" maxHeight="-Infinity"
+      maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0"
+                 prefWidth="900.0" VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Geral">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Trocar de Usuário"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Sair"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Viagens">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Nova Viagem"/>
+                        <MenuItem mnemonicParsing="false" text="Pesquisar Viagem"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Importar Viagem"/>
+                        <MenuItem mnemonicParsing="false" text="Exportar Viagem"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Motoristas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Novo Motorista"/>
+                        <MenuItem mnemonicParsing="false" text="Pesquisar Motorista"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Importar Motorista"/>
+                        <MenuItem mnemonicParsing="false" text="Exportar Motorista"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Veículos">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Novo Veículo"/>
+                        <MenuItem mnemonicParsing="false" text="Pesquisar Veículo"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Importar Veículo"/>
+                        <MenuItem mnemonicParsing="false" text="Exportar Veículo"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true"
+                   maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="551.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+            <items>
+                <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="551.0" prefWidth="230.0">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
+                            <children>
+                                <ListView fx:id="listViewMotoristas" maxHeight="-Infinity" maxWidth="-Infinity"
+                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0"
+                                          prefWidth="230.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+                <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="551.0" prefWidth="440.0">
+                    <content>
+                        <AnchorPane id="Content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="551.0" prefWidth="440.0">
+                            <children>
+                                <ListView fx:id="listViewViagens" maxHeight="-Infinity" maxWidth="-Infinity"
+                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0"
+                                          prefWidth="440.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+                <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="551.0" prefWidth="230.0">
+                    <content>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="551.0" prefWidth="230.0">
+                            <children>
+                                <ListView fx:id="listViewVeiculos" maxHeight="-Infinity" maxWidth="-Infinity"
+                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0"
+                                          prefWidth="230.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </items>
+        </SplitPane>
+        <HBox id="HBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="22.0" prefWidth="115.0" spacing="5.0" VBox.vgrow="NEVER">
+            <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="16.0" prefWidth="56.0" text="Motoristas" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="11.0" fx:id="x3"/>
+                    </font>
+                    <textFill>
+                        <Color red="0.625" green="0.625" blue="0.625" fx:id="x4"/>
+                    </textFill>
+                </Label>
+                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                      prefHeight="16.0" prefWidth="786.0" HBox.hgrow="ALWAYS"/>
+                <Label font="$x3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="16.0" prefWidth="43.0" text="Veículos" textFill="$x4" HBox.hgrow="NEVER"/>
+            </children>
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+            </padding>
+        </HBox>
+    </children>
 </VBox>
