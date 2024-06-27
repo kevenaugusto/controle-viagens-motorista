@@ -33,4 +33,5 @@ public class Motorista implements Serializable {
     public String toString() {
         return nomeCompleto;
     }
+
 }

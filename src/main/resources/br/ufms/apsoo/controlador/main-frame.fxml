@@ -48,7 +48,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufms.apsoo.controlador.controller.MainFrameController">
+<VBox fx:id="mainPanel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufms.apsoo.controlador.controller.MainFrameController">
     <children>
         <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="900.0" VBox.vgrow="NEVER">
             <menus>
@@ -56,7 +56,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="Trocar de Usuário" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Sair" />
+                        <MenuItem fx:id="closeButton" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Sair" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viagens">
