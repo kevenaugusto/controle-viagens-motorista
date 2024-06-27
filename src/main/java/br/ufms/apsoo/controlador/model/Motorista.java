@@ -5,33 +5,29 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "MOTORISTA")
-public class Motorista implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Motorista extends Usuario implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private UUID id;
+    @Column(name = "VALIDADE_CNH")
+    private Date validadeCnh;
 
-    @Column(name = "NOME_COMPLETO")
-    private String nomeCompleto;
-
-    @Column(name = "CARTEIRA_DE_HABILITACAO")
-    private String carteiraDeHabilitacao;
+    public Motorista(UUID uuid, String nomeCompleto, String telefone, String cpf, Date validadeCnh) {
+        super(uuid, nomeCompleto, telefone, cpf);
+        this.validadeCnh = validadeCnh;
+    }
 
     @Override
     public String toString() {
-        return nomeCompleto;
+        return super.getNomeCompleto();
     }
 
 }

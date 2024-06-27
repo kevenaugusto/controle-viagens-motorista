@@ -23,7 +23,7 @@ public class ControladorApplication extends Application {
             var transaction = entityManager.getTransaction();
             //noinspection TryFinallyCanBeTryWithResources
             try {
-                var motorista = new Motorista(null, "José da Silva", "123.456.789-00");
+                var motorista = new Motorista(null, "José da Silva", "9 1234-5678", "123.456.789-00", new Date());
                 var veiculo = new Veiculo(null, "Fiat", "Uno", "HSU-3E53", 18500);
                 var viagem = new Viagem(null, motorista, veiculo, "Rua dos Bobos, nº 0", null, null, 0, new Date());
                 transaction.begin();
