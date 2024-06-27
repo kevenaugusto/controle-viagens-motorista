@@ -13,8 +13,8 @@ import java.util.Date;
 
 import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
-public class HelloApplication extends Application {
-    private static final String PERSISTENCE_UNIT_NAME = "br.ufms.apsoo.controlador";
+public class ControladorApplication extends Application {
+    public static final String PERSISTENCE_UNIT_NAME = "br.ufms.apsoo.controlador";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
             }
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-frame.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("main-frame.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
