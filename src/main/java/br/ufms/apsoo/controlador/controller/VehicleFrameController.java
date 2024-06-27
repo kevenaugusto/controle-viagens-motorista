@@ -1,6 +1,8 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.model.Veiculo;
 import br.ufms.apsoo.controlador.service.VeiculoService;
+import br.ufms.apsoo.controlador.singleton.VeiculoSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -28,7 +30,17 @@ public class VehicleFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        removeButton.setDisable(true);
+        if (VeiculoSingleton.isVeiculo()) {
+            Veiculo veiculo = VeiculoSingleton.getVeiculo();
+            marcaVeiculoTextField.setText(veiculo.getMarca());
+            modeloVeiculoTextField.setText(veiculo.getModelo());
+            placaVeiculoTextField.setText(veiculo.getPlaca());
+            quilometragemAtualTextField.setText(String.valueOf(veiculo.getQuilometragem()));
+            quilometragemAtualTextField.setDisable(true);
+            VeiculoSingleton.clearVeiculo();
+        } else {
+            removeButton.setDisable(true);
+        }
     }
 
     @FXML

@@ -27,4 +27,21 @@ public class SceneBuilder {
         }
     }
 
+    public static void startVehicleCreateForm() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("vehicle-create-form.fxml"));
+            Stage vehicleStage = new Stage();
+            vehicleStage.setScene(new Scene(fxmlLoader.load()));
+            vehicleStage.setTitle("Veículo"); // TODO: Get title from a properties file
+            vehicleStage.show();
+        } catch (Exception e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Houve um erro ao abrir a janela de veículos.");
+            errorAlert.setHeaderText("Erro!");
+            errorAlert.setTitle("Erro interno");
+            errorAlert.showAndWait();
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
 }

@@ -2,6 +2,8 @@ package br.ufms.apsoo.controlador.controller;
 
 import br.ufms.apsoo.controlador.model.Veiculo;
 import br.ufms.apsoo.controlador.service.SearchVehicleService;
+import br.ufms.apsoo.controlador.singleton.VeiculoSingleton;
+import br.ufms.apsoo.controlador.util.SceneBuilder;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,6 +65,18 @@ public class SearchVehicleController implements Initializable {
             if (newValue != null) {
                 searchTextField.setText(EMPTY);
             }
+        });
+
+        vehicleTableView.setRowFactory(motoristaTableView -> {
+            TableRow<Veiculo> tableRow = new TableRow<>();
+            tableRow.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getClickCount() == 2 && !tableRow.isEmpty()) {
+                    VeiculoSingleton.setVeiculo(tableRow.getItem());
+                    SceneBuilder.startVehicleCreateForm();
+                    vehicleTableView.getScene().getWindow().hide();
+                }
+            });
+            return tableRow;
         });
     }
 
