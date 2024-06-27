@@ -1,6 +1,8 @@
 package br.ufms.apsoo.controlador.controller;
 
+import br.ufms.apsoo.controlador.model.Usuario;
 import br.ufms.apsoo.controlador.service.UserService;
+import br.ufms.apsoo.controlador.singleton.UserSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -27,7 +29,15 @@ public class UserFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        removeButton.setDisable(true);
+        if (UserSingleton.isUser()) {
+            Usuario user = UserSingleton.getUser();
+            userNameTextField.setText(user.getNomeCompleto());
+            userCpfTextField.setText(user.getCpf());
+            userPhoneTextField.setText(user.getTelefone());
+            UserSingleton.clearUser();
+        } else {
+            removeButton.setDisable(true);
+        }
     }
 
     @FXML

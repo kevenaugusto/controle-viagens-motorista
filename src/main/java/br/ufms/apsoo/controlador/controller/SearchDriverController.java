@@ -17,9 +17,9 @@ import static br.ufms.apsoo.controlador.controller.SearchVehicleController.EMPTY
 
 public class SearchDriverController implements Initializable {
 
-    private static final String NOME_COMPLETO = "Nome Completo";
-    private static final String CPF = "CPF";
-    private static final String TELEFONE = "Telefone";
+    public static final String NOME_COMPLETO = "Nome Completo";
+    public static final String CPF = "CPF";
+    public static final String TELEFONE = "Telefone";
 
     @FXML private TableView<Motorista> driverTableView;
     @FXML private TableColumn<Motorista, String> nomeTableColumn;

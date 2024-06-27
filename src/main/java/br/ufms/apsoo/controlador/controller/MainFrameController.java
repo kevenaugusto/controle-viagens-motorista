@@ -95,6 +95,11 @@ public class MainFrameController implements Initializable {
     }
 
     @FXML
+    private void handleSearchUserButtonAction() {
+        SceneBuilder.startSearchUserFrom();
+    }
+
+    @FXML
     private void handleSearchTripButtonAction() {
         SceneBuilder.startSearchTripForm();
     }

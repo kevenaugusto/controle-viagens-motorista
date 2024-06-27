@@ -30,10 +30,10 @@ public class Usuario implements Serializable {
     @Column(name = "NOME_COMPLETO")
     private String nomeCompleto;
 
-    @Column(name = "TELEFONE")
-    private String telefone;
-
     @Column(name = "CPF")
     private String cpf;
+
+    @Column(name = "TELEFONE")
+    private String telefone;
 
 }
