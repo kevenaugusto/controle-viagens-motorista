@@ -7,7 +7,6 @@ import br.ufms.apsoo.controlador.model.Viagem;
 import br.ufms.apsoo.controlador.service.MotoristaService;
 import br.ufms.apsoo.controlador.service.VeiculoService;
 import br.ufms.apsoo.controlador.service.ViagemService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,14 +51,14 @@ public class MainFrameController implements Initializable {
     }
 
     @FXML
-    private void handleCloseButtonAction(ActionEvent event) {
+    private void handleCloseButtonAction() {
         mainPanel.getScene().getWindow().hide();
     }
 
     @FXML
     private void handleNewTripButtonAction() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("trip-create-form.xml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorApplication.class.getResource("trip-create-form.fxml"));
             Stage tripStage = new Stage();
             tripStage.setScene(new Scene(fxmlLoader.load()));
             tripStage.setTitle("Viagem"); // TODO: Get title from a properties file
