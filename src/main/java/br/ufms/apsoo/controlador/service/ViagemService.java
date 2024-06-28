@@ -18,16 +18,27 @@ public class ViagemService {
         }
     }
 
-    public void saveTrip(String destinoViagem) throws IllegalArgumentException {
-        var optionalDestinoViagem = Optional.ofNullable(destinoViagem).filter(not(String::isEmpty));
+    public void saveTrip(Viagem tripToBeSaved) throws IllegalArgumentException {
+        var optionalDestinoViagem = Optional.ofNullable(tripToBeSaved.getDestino()).filter(not(String::isEmpty));
 
         try (var viagemRepository = new ViagemRepository()) {
-            viagemRepository.saveViagem(new Viagem(
-                null, null, null,
-                optionalDestinoViagem.orElseThrow(() -> new IllegalArgumentException("O destino da viagem não pode ser vazio.")),
-                null, null, 0,
-                new Date()
-            ));
+            optionalDestinoViagem.orElseThrow(() -> new IllegalArgumentException("O destino da viagem não pode ser vazio."));
+            viagemRepository.saveViagem(tripToBeSaved);
+        }
+    }
+
+    public void updateTrip(Viagem tripToBeUpdated) {
+        var optionalDestinoViagem = Optional.ofNullable(tripToBeUpdated.getDestino()).filter(not(String::isEmpty));
+
+        try (var viagemRepository = new ViagemRepository()) {
+            optionalDestinoViagem.orElseThrow(() -> new IllegalArgumentException("O destino da viagem não pode ser vazio."));
+            viagemRepository.updateTrip(tripToBeUpdated);
+        }
+    }
+
+    public void removeTrip(Viagem tripToBeRemoved) {
+        try (var viagemRepository = new ViagemRepository()) {
+            viagemRepository.removeTrip(tripToBeRemoved);
         }
     }
 

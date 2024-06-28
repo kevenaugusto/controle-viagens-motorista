@@ -32,7 +32,7 @@ public class TripFrameController implements Initializable {
     @FXML private VBox tripPanel;
 
     private final ViagemService viagemService;
-    private final Viagem viagem;
+    private Viagem viagem;
 
     public TripFrameController() {
         this.viagemService = new ViagemService();
@@ -42,15 +42,13 @@ public class TripFrameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (ViagemSingleton.isViagem()) {
-            var viagemRecovered = ViagemSingleton.getViagem();
-            viagem.setMotoristaDesignado(viagemRecovered.getMotoristaDesignado());
-            viagem.setVeiculoDesignado(viagemRecovered.getVeiculoDesignado());
-            motoristaTextField.setText(viagemRecovered.getMotoristaDesignado().getNomeCompleto());
-            veiculoTextField.setText(viagemRecovered.getVeiculoDesignado().getModelo() + "/" + viagemRecovered.getVeiculoDesignado().getPlaca());
-            destinoViagemTextField.setText(viagemRecovered.getDestino());
-            Date horaInicial = viagemRecovered.getHoraInicial();
+            viagem = ViagemSingleton.getViagem();
+            motoristaTextField.setText(viagem.getMotoristaDesignado().getNomeCompleto());
+            veiculoTextField.setText(viagem.getVeiculoDesignado().getModelo() + "/" + viagem.getVeiculoDesignado().getPlaca());
+            destinoViagemTextField.setText(viagem.getDestino());
+            Date horaInicial = viagem.getHoraInicial();
             if (horaInicial != null) horarioInicioTextField.setText(horaInicial.toString());
-            Date horaFinal = viagemRecovered.getHoraFinal();
+            Date horaFinal = viagem.getHoraFinal();
             if (horaFinal != null) horarioTerminoTextField.setText(horaFinal.toString());
             ViagemSingleton.clearViagem();
         } else {
@@ -87,10 +85,20 @@ public class TripFrameController implements Initializable {
     @FXML
     private void handleSaveButtonAction() {
         try {
-            viagemService.saveTrip(destinoViagemTextField.getText());
+            String successMessage;
+
+            if (viagem == null || viagem.getId() == null) {
+                viagem.setDestino(destinoViagemTextField.getText());
+                viagemService.saveTrip(viagem);
+                successMessage = "A viagem foi salva.";
+            } else {
+                viagem.setDestino(destinoViagemTextField.getText());
+                viagemService.updateTrip(viagem);
+                successMessage = "A viagem foi atualizada.";
+            }
 
             // TODO: Make following messages parametrizable by a properties file
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "A viagem foi salvo.");
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, successMessage);
             successAlert.setHeaderText("Sucesso!");
             successAlert.setTitle("Aviso");
             successAlert.showAndWait();
@@ -114,7 +122,27 @@ public class TripFrameController implements Initializable {
 
     @FXML
     private void handleRemoveButtonAction() {
-        // TODO: Implement method to remove a driver
+        try {
+            if (viagem != null && viagem.getId() != null) {
+                viagemService.removeTrip(viagem);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "A viagem foi removida.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível remover a viagem.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeTripFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

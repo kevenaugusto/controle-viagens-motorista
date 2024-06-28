@@ -1,5 +1,7 @@
 package br.ufms.apsoo.controlador.repository;
 
+import br.ufms.apsoo.controlador.model.Motorista;
+import br.ufms.apsoo.controlador.model.Veiculo;
 import br.ufms.apsoo.controlador.model.Viagem;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -29,6 +31,10 @@ public class ViagemRepository implements Closeable {
 
     public void saveViagem(Viagem viagemToBeSaved) {
         try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalDriver = entityManager.find(Motorista.class, viagemToBeSaved.getMotoristaDesignado().getId());
+            var originalVehicle = entityManager.find(Veiculo.class, viagemToBeSaved.getVeiculoDesignado().getId());
+            viagemToBeSaved.setMotoristaDesignado(originalDriver);
+            viagemToBeSaved.setVeiculoDesignado(originalVehicle);
             var transaction = entityManager.getTransaction();
             try {
                 transaction.begin();
@@ -39,6 +45,43 @@ public class ViagemRepository implements Closeable {
                 throw error;
             } finally {
                 entityManager.close();
+            }
+        }
+    }
+
+    public void updateTrip(Viagem tripToBeUpdated) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalDriver = entityManager.find(Motorista.class, tripToBeUpdated.getMotoristaDesignado().getId());
+            var originalVehicle = entityManager.find(Veiculo.class, tripToBeUpdated.getVeiculoDesignado().getId());
+            var originalTrip = entityManager.find(Viagem.class, tripToBeUpdated.getId());
+            originalTrip.setMotoristaDesignado(originalDriver);
+            originalTrip.setVeiculoDesignado(originalVehicle);
+            originalTrip.setDestino(tripToBeUpdated.getDestino());
+            originalTrip.setHoraInicial(tripToBeUpdated.getHoraInicial());
+            originalTrip.setHoraFinal(tripToBeUpdated.getHoraFinal());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalTrip);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
+    public void removeTrip(Viagem tripToBeRemoved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalTrip = entityManager.find(Viagem.class, tripToBeRemoved.getId());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.remove(originalTrip);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
             }
         }
     }
