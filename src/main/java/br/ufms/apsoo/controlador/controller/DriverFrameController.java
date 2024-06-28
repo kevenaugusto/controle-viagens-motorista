@@ -12,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DriverFrameController implements Initializable {
@@ -26,6 +28,7 @@ public class DriverFrameController implements Initializable {
     @FXML private VBox driverPanel;
 
     private final MotoristaService motoristaService;
+    private Motorista motorista;
 
     public DriverFrameController() {
         this.motoristaService = new MotoristaService();
@@ -34,7 +37,7 @@ public class DriverFrameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (MotoristaSingleton.isMotorista()) {
-            Motorista motorista = MotoristaSingleton.getMotorista();
+            motorista = MotoristaSingleton.getMotorista();
             nomeCompletoTextField.setText(motorista.getNomeCompleto());
             cpfTextField.setText(motorista.getCpf());
             telefoneTextField.setText(motorista.getTelefone());
@@ -48,15 +51,28 @@ public class DriverFrameController implements Initializable {
     @FXML
     private void handleSaveButtonAction() {
         try {
-            motoristaService.saveMotorista(
-                nomeCompletoTextField.getText(),
-                cpfTextField.getText(),
-                telefoneTextField.getText(),
-                validadeCnhDatePicker.getValue()
-            );
+            String successMessage;
+
+            if (motorista == null || motorista.getId() == null) {
+                motoristaService.saveMotorista(
+                    nomeCompletoTextField.getText(),
+                    cpfTextField.getText(),
+                    telefoneTextField.getText(),
+                    validadeCnhDatePicker.getValue()
+                );
+                successMessage = "O motorista foi salvo.";
+            } else {
+                motorista.setNomeCompleto(nomeCompletoTextField.getText());
+                motorista.setCpf(cpfTextField.getText());
+                motorista.setTelefone(telefoneTextField.getText());
+                Date convertedValidadeCnh = Date.from(Instant.from(validadeCnhDatePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
+                motorista.setValidadeCnh(convertedValidadeCnh);
+                motoristaService.updateMotorista(motorista);
+                successMessage = "O motorista foi atualizado.";
+            }
 
             // TODO: Make following messages parametrizable by a properties file
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O motorista foi salvo.");
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, successMessage);
             successAlert.setHeaderText("Sucesso!");
             successAlert.setTitle("Aviso");
             successAlert.showAndWait();
@@ -80,7 +96,27 @@ public class DriverFrameController implements Initializable {
 
     @FXML
     private void handleRemoveButtonAction() {
-        // TODO: Implement method to remove a driver
+        try {
+            if (motorista != null && motorista.getId() != null) {
+                motoristaService.removeMotorista(motorista);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O motorista foi removido.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível remover o motorista.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeDriverFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

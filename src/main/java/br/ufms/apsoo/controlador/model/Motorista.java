@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "MOTORISTA")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

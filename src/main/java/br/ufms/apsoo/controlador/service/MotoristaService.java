@@ -40,4 +40,25 @@ public class MotoristaService {
         }
     }
 
+    public void updateMotorista(Motorista motoristaToBeUpdated) throws IllegalArgumentException {
+        var optionalNomeCompleto = Optional.ofNullable(motoristaToBeUpdated.getNomeCompleto()).filter(not(String::isEmpty));
+        var optionalCpf = Optional.ofNullable(motoristaToBeUpdated.getCpf()).filter(not(String::isEmpty));
+        var optionalTelefone = Optional.ofNullable(motoristaToBeUpdated.getTelefone()).filter(not(String::isEmpty));
+        var optionalValidadeCnh = Optional.ofNullable(motoristaToBeUpdated.getValidadeCnh());
+
+        try (var motoristaRepository = new MotoristaRepository()) {
+            optionalNomeCompleto.orElseThrow(() -> new IllegalArgumentException("O nome não pode ser vazio."));
+            optionalCpf.orElseThrow(() -> new IllegalArgumentException("O CPF inserido é inválido."));
+            optionalTelefone.orElseThrow(() -> new IllegalArgumentException("O telefone precisa ser preenchido."));
+            optionalValidadeCnh.orElseThrow(() -> new IllegalArgumentException("A data de validade da CNH é inválida."));
+            motoristaRepository.updateMotorista(motoristaToBeUpdated);
+        }
+    }
+
+    public void removeMotorista(Motorista motoristaToBeRemoved) {
+        try (var motoristaRepository = new MotoristaRepository()) {
+            motoristaRepository.removeMotorista(motoristaToBeRemoved);
+        }
+    }
+
 }

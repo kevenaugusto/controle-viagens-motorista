@@ -43,6 +43,40 @@ public class MotoristaRepository implements Closeable {
         }
     }
 
+    public void updateMotorista(Motorista motoristaToBeUpdated) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalMotorista = entityManager.find(Motorista.class, motoristaToBeUpdated);
+            originalMotorista.setNomeCompleto(motoristaToBeUpdated.getNomeCompleto());
+            originalMotorista.setCpf(motoristaToBeUpdated.getCpf());
+            originalMotorista.setTelefone(motoristaToBeUpdated.getTelefone());
+            originalMotorista.setValidadeCnh(motoristaToBeUpdated.getValidadeCnh());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalMotorista);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
+    public void removeMotorista(Motorista motoristaToBeRemoved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalMotorista = entityManager.find(Motorista.class, motoristaToBeRemoved.getId());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.remove(originalMotorista);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
     @Override
     public void close() {
         this.entityManagerFactory.close();
