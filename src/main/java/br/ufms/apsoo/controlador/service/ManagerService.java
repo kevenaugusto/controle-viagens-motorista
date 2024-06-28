@@ -2,6 +2,7 @@ package br.ufms.apsoo.controlador.service;
 
 import br.ufms.apsoo.controlador.model.Gerente;
 import br.ufms.apsoo.controlador.repository.ManagerRepository;
+import br.ufms.apsoo.controlador.repository.UserRepository;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -29,6 +30,27 @@ public class ManagerService {
                 optionalTelefone.orElseThrow(() -> new IllegalArgumentException("O telefone precisa ser preenchido.")),
                 convertedValidadeCnh
             ));
+        }
+    }
+
+    public void updateManager(Gerente managerToBeUpdated) {
+        var optionalNomeCompleto = Optional.ofNullable(managerToBeUpdated.getNomeCompleto()).filter(not(String::isEmpty));
+        var optionalCpf = Optional.ofNullable(managerToBeUpdated.getCpf()).filter(not(String::isEmpty));
+        var optionalTelefone = Optional.ofNullable(managerToBeUpdated.getTelefone()).filter(not(String::isEmpty));
+        var optionalValidadeCnh = Optional.ofNullable(managerToBeUpdated.getValidadeCnh());
+
+        try (var managerRepository = new ManagerRepository()) {
+            optionalNomeCompleto.orElseThrow(() -> new IllegalArgumentException("O nome não pode ser vazio."));
+            optionalCpf.orElseThrow(() -> new IllegalArgumentException("O CPF inserido é inválido."));
+            optionalTelefone.orElseThrow(() -> new IllegalArgumentException("O telefone precisa ser preenchido."));
+            optionalValidadeCnh.orElseThrow(() -> new IllegalArgumentException("A data de validade da CNH é inválida."));
+            managerRepository.updateManager(managerToBeUpdated);
+        }
+    }
+
+    public void removeManager(Gerente managerToBeRemoved) {
+        try (var managerRepository = new ManagerRepository()) {
+            managerRepository.removeManager(managerToBeRemoved);
         }
     }
 

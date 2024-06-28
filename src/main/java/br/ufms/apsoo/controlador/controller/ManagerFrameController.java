@@ -12,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ManagerFrameController implements Initializable {
@@ -26,6 +28,7 @@ public class ManagerFrameController implements Initializable {
     @FXML private Button removeButton;
 
     private final ManagerService managerService;
+    private Gerente manager;
 
     public ManagerFrameController() {
         this.managerService = new ManagerService();
@@ -34,11 +37,11 @@ public class ManagerFrameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (ManagerSingleton.isGerente()) {
-            Gerente gerente = ManagerSingleton.getGerente();
-            managerNameTextField.setText(gerente.getNomeCompleto());
-            managerCpfTextField.setText(gerente.getCpf());
-            managerTelefoneTextField.setText(gerente.getTelefone());
-            managerValidadeCnhDatePicker.setValue(LocalDate.ofInstant(gerente.getValidadeCnh().toInstant(), ZoneId.systemDefault()));
+            manager = ManagerSingleton.getGerente();
+            managerNameTextField.setText(manager.getNomeCompleto());
+            managerCpfTextField.setText(manager.getCpf());
+            managerTelefoneTextField.setText(manager.getTelefone());
+            managerValidadeCnhDatePicker.setValue(LocalDate.ofInstant(manager.getValidadeCnh().toInstant(), ZoneId.systemDefault()));
             ManagerSingleton.clearGerente();
         } else {
             removeButton.setDisable(true);
@@ -48,15 +51,28 @@ public class ManagerFrameController implements Initializable {
     @FXML
     private void handleSaveButtonAction() {
         try {
-            managerService.saveManager(
-                managerNameTextField.getText(),
-                managerCpfTextField.getText(),
-                managerTelefoneTextField.getText(),
-                managerValidadeCnhDatePicker.getValue()
-            );
+            String successMessage;
+
+            if (manager == null || manager.getId() == null) {
+                managerService.saveManager(
+                    managerNameTextField.getText(),
+                    managerCpfTextField.getText(),
+                    managerTelefoneTextField.getText(),
+                    managerValidadeCnhDatePicker.getValue()
+                );
+                successMessage = "O gerente foi salvo.";
+            } else {
+                manager.setNomeCompleto(managerNameTextField.getText());
+                manager.setCpf(managerCpfTextField.getText());
+                manager.setTelefone(managerTelefoneTextField.getText());
+                Date convertedValidadeCnh = Date.from(Instant.from(managerValidadeCnhDatePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
+                manager.setValidadeCnh(convertedValidadeCnh);
+                managerService.updateManager(manager);
+                successMessage = "O gerente foi atualizado.";
+            }
 
             // TODO: Make following messages parametrizable by a properties file
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O gerente foi salvo.");
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, successMessage);
             successAlert.setHeaderText("Sucesso!");
             successAlert.setTitle("Aviso");
             successAlert.showAndWait();
@@ -80,7 +96,27 @@ public class ManagerFrameController implements Initializable {
 
     @FXML
     private void handleRemoveButtonAction() {
-        // TODO: Implement method to remove a manager
+        try {
+            if (manager != null && manager.getId() != null) {
+                managerService.removeManager(manager);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O gerente foi removido.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível remover o gerente.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeManagerCreateForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
