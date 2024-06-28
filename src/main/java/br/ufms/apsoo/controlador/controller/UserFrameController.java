@@ -22,6 +22,7 @@ public class UserFrameController implements Initializable {
     @FXML private Button removeButton;
 
     private final UserService userService;
+    private Usuario user;
 
     public UserFrameController() {
         this.userService = new UserService();
@@ -30,7 +31,7 @@ public class UserFrameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (UserSingleton.isUser()) {
-            Usuario user = UserSingleton.getUser();
+            user = UserSingleton.getUser();
             userNameTextField.setText(user.getNomeCompleto());
             userCpfTextField.setText(user.getCpf());
             userPhoneTextField.setText(user.getTelefone());
@@ -43,14 +44,25 @@ public class UserFrameController implements Initializable {
     @FXML
     void handleSaveButtonAction() {
         try {
-            userService.saveUser(
-                userNameTextField.getText(),
-                userCpfTextField.getText(),
-                userPhoneTextField.getText()
-            );
+            String successMessage;
+
+            if (user == null || user.getId() == null) {
+                userService.saveUser(
+                    userNameTextField.getText(),
+                    userCpfTextField.getText(),
+                    userPhoneTextField.getText()
+                );
+                successMessage = "O usuário foi salvo.";
+            } else {
+                user.setNomeCompleto(userNameTextField.getText());
+                user.setCpf(userCpfTextField.getText());
+                user.setTelefone(userPhoneTextField.getText());
+                userService.updateUser(user);
+                successMessage = "O usuário foi atualizado.";
+            }
 
             // TODO: Make following messages parametrizable by a properties file
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O usuário foi salvo.");
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, successMessage);
             successAlert.setHeaderText("Sucesso!");
             successAlert.setTitle("Aviso");
             successAlert.showAndWait();
@@ -74,7 +86,27 @@ public class UserFrameController implements Initializable {
 
     @FXML
     void handleRemoveButtonAction() {
-        // TODO: Implement method to remove a user
+        try {
+            if (user != null && user.getId() != null) {
+                userService.removeUser(user);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O usuário foi removido.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível remover o usuário.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeUserFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

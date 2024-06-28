@@ -43,6 +43,43 @@ public class UserRepository implements Closeable {
         }
     }
 
+    public void updateUser(Usuario userToBeUpdated) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalUser = entityManager.find(Usuario.class, userToBeUpdated.getId());
+            originalUser.setNomeCompleto(userToBeUpdated.getNomeCompleto());
+            originalUser.setCpf(userToBeUpdated.getCpf());
+            originalUser.setTelefone(userToBeUpdated.getTelefone());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalUser);
+                transaction.commit();
+            } catch (Exception error) {
+                if (transaction.isActive()) transaction.rollback();
+                throw error;
+            } finally {
+                entityManager.close();
+            }
+        }
+    }
+
+    public void removeUser(Usuario userToBeRemoved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalUser = entityManager.find(Usuario.class, userToBeRemoved.getId());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.remove(originalUser);
+                transaction.commit();
+            } catch (Exception error) {
+                if (transaction.isActive()) transaction.rollback();
+                throw error;
+            } finally {
+                entityManager.close();
+            }
+        }
+    }
+
     @Override
     public void close() {
         this.entityManagerFactory.close();

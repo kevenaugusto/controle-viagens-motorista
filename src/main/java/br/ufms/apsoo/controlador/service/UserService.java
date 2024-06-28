@@ -24,4 +24,23 @@ public class UserService {
         }
     }
 
+    public void updateUser(Usuario userToBeUpdated) {
+        var optionalNomeCompleto = Optional.ofNullable(userToBeUpdated.getNomeCompleto()).filter(not(String::isEmpty));
+        var optionalCpf = Optional.ofNullable(userToBeUpdated.getCpf()).filter(not(String::isEmpty));
+        var optionalTelefone = Optional.ofNullable(userToBeUpdated.getTelefone()).filter(not(String::isEmpty));
+
+        try (var userRepository = new UserRepository()) {
+            optionalNomeCompleto.orElseThrow(() -> new IllegalArgumentException("O nome não pode ser vazio."));
+            optionalCpf.orElseThrow(() -> new IllegalArgumentException("O CPF inserido é inválido."));
+            optionalTelefone.orElseThrow(() -> new IllegalArgumentException("O telefone precisa ser preenchido."));
+            userRepository.updateUser(userToBeUpdated);
+        }
+    }
+
+    public void removeUser(Usuario userToBeRemoved) {
+        try (var userRepository = new UserRepository()) {
+            userRepository.removeUser(userToBeRemoved);
+        }
+    }
+
 }
