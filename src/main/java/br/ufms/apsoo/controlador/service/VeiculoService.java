@@ -37,4 +37,23 @@ public class VeiculoService {
         }
     }
 
+    public void updateVehicle(Veiculo vehicleToBeUpdated) {
+        var optionalMarca = Optional.ofNullable(vehicleToBeUpdated.getMarca()).filter(not(String::isEmpty));
+        var optionalModelo = Optional.ofNullable(vehicleToBeUpdated.getModelo()).filter(not(String::isEmpty));
+        var optionalPlaca = Optional.ofNullable(vehicleToBeUpdated.getPlaca()).filter(not(String::isEmpty));
+
+        try (var veiculoRepository = new VeiculoRepository()) {
+            optionalMarca.orElseThrow(() -> new IllegalArgumentException("O campo marca não pode ser vazio."));
+            optionalModelo.orElseThrow(() -> new IllegalArgumentException("O modelo escrito não é válido."));
+            optionalPlaca.orElseThrow(() -> new IllegalArgumentException("A placa precisa ser preenchida."));
+            veiculoRepository.updateVehicle(vehicleToBeUpdated);
+        }
+    }
+
+    public void removeVehicle(Veiculo vehicleToBeDeleted) {
+        try (var veiculoRepository = new VeiculoRepository()) {
+            veiculoRepository.removeVehicle(vehicleToBeDeleted);
+        }
+    }
+
 }

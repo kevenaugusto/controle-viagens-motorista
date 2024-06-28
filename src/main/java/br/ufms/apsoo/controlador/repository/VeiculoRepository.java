@@ -43,6 +43,40 @@ public class VeiculoRepository implements Closeable {
         }
     }
 
+    public void updateVehicle(Veiculo vehicleToBeUpdated) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalVehicle = entityManager.find(Veiculo.class, vehicleToBeUpdated.getId());
+            originalVehicle.setMarca(vehicleToBeUpdated.getMarca());
+            originalVehicle.setModelo(vehicleToBeUpdated.getModelo());
+            originalVehicle.setPlaca(vehicleToBeUpdated.getPlaca());
+            originalVehicle.setQuilometragem(vehicleToBeUpdated.getQuilometragem());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalVehicle);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
+    public void removeVehicle(Veiculo vehicleToBeRemoved) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalVehicle = entityManager.find(Veiculo.class, vehicleToBeRemoved.getId());
+            var transction  = entityManager.getTransaction();
+            try {
+                transction.begin();
+                entityManager.remove(originalVehicle);
+                transction.commit();
+            } catch (Exception e) {
+                if (transction.isActive()) transction.rollback();
+                throw e;
+            }
+        }
+    }
+
     @Override
     public void close() {
         this.entityManagerFactory.close();
