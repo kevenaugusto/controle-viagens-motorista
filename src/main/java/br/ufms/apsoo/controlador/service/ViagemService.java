@@ -42,4 +42,16 @@ public class ViagemService {
         }
     }
 
+    public void startTrip(Viagem tripToBeStarted) {
+        try (var viagemRepository = new ViagemRepository()) {
+            viagemRepository.startTrip(tripToBeStarted);
+        }
+    }
+
+    public void finishTrip(Viagem tripToBeFinished) {
+        try (var viagemRepository = new ViagemRepository()) {
+            viagemRepository.finishTrip(tripToBeFinished);
+        }
+    }
+
 }

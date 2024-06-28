@@ -50,6 +50,8 @@ public class Viagem implements Serializable {
 
     @Override
     public String toString() {
-        return destino;
+        if (horaInicial == null && horaFinal == null) return destino;
+        else if (horaInicial != null && horaFinal == null) return destino + " [EM PROGRESSO]";
+        else return destino + " [ENCERRADA]";
     }
 }

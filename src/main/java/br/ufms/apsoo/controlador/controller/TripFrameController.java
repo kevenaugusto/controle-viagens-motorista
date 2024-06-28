@@ -47,9 +47,15 @@ public class TripFrameController implements Initializable {
             veiculoTextField.setText(viagem.getVeiculoDesignado().getModelo() + "/" + viagem.getVeiculoDesignado().getPlaca());
             destinoViagemTextField.setText(viagem.getDestino());
             Date horaInicial = viagem.getHoraInicial();
-            if (horaInicial != null) horarioInicioTextField.setText(horaInicial.toString());
+            if (horaInicial != null) {
+                horarioInicioTextField.setText(horaInicial.toString());
+                startTripButton.setDisable(true);
+            }
             Date horaFinal = viagem.getHoraFinal();
-            if (horaFinal != null) horarioTerminoTextField.setText(horaFinal.toString());
+            if (horaFinal != null) {
+                horarioTerminoTextField.setText(horaFinal.toString());
+                endTripButton.setDisable(true);
+            }
             ViagemSingleton.clearViagem();
         } else {
             removeButton.setDisable(true);
@@ -147,12 +153,54 @@ public class TripFrameController implements Initializable {
 
     @FXML
     private void handleStartTripButtonAction() {
-        // TODO: Implement method to start a trip
+        try {
+            if (viagem != null && viagem.getId() != null && viagem.getHoraInicial() == null) {
+                viagem.setHoraInicial(new Date());
+                viagemService.startTrip(viagem);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "A viagem foi iniciada.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível iniciar a viagem.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeTripFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleEndTripButtonAction() {
-        // TODO: Implement method to end a trip
+        try {
+            if (viagem != null && viagem.getId() != null && viagem.getHoraInicial() != null && viagem.getHoraFinal() == null) {
+                viagem.setHoraFinal(new Date());
+                viagemService.finishTrip(viagem);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "A viagem foi encerrada.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível encerrar a viagem.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeTripFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

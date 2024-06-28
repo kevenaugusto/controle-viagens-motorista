@@ -86,6 +86,38 @@ public class ViagemRepository implements Closeable {
         }
     }
 
+    public void startTrip(Viagem tripToBeStarted) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalTrip = entityManager.find(Viagem.class, tripToBeStarted.getId());
+            originalTrip.setHoraInicial(tripToBeStarted.getHoraInicial());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalTrip);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
+    public void finishTrip(Viagem tripToBeFinished) {
+        try (var entityManager = entityManagerFactory.createEntityManager()) {
+            var originalTrip = entityManager.find(Viagem.class, tripToBeFinished.getId());
+            originalTrip.setHoraFinal(tripToBeFinished.getHoraFinal());
+            var transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(originalTrip);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
     @Override
     public void close() {
         this.entityManagerFactory.close();
