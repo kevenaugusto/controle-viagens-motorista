@@ -1,0 +1,122 @@
+package br.ufms.apsoo.controlador.controller;
+
+import br.ufms.apsoo.controlador.model.Motorista;
+import br.ufms.apsoo.controlador.service.MotoristaService;
+import br.ufms.apsoo.controlador.singleton.MotoristaSingleton;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+
+import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.ResourceBundle;
+
+public class DriverFrameController implements Initializable {
+
+    @FXML private TextField nomeCompletoTextField;
+    @FXML private TextField cpfTextField;
+    @FXML private TextField telefoneTextField;
+    @FXML private DatePicker validadeCnhDatePicker;
+    @FXML private Button removeButton;
+    @FXML private VBox driverPanel;
+
+    private final MotoristaService motoristaService;
+    private Motorista motorista;
+
+    public DriverFrameController() {
+        this.motoristaService = new MotoristaService();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (MotoristaSingleton.isMotorista()) {
+            motorista = MotoristaSingleton.getMotorista();
+            nomeCompletoTextField.setText(motorista.getNomeCompleto());
+            cpfTextField.setText(motorista.getCpf());
+            telefoneTextField.setText(motorista.getTelefone());
+            validadeCnhDatePicker.setValue(LocalDate.ofInstant(motorista.getValidadeCnh().toInstant(), ZoneId.systemDefault()));
+            MotoristaSingleton.clearMotorista();
+        } else {
+            removeButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void handleSaveButtonAction() {
+        try {
+            String successMessage;
+
+            if (motorista == null || motorista.getId() == null) {
+                motoristaService.saveMotorista(
+                    nomeCompletoTextField.getText(),
+                    cpfTextField.getText(),
+                    telefoneTextField.getText(),
+                    validadeCnhDatePicker.getValue()
+                );
+                successMessage = "O motorista foi salvo.";
+            } else {
+                motorista.setNomeCompleto(nomeCompletoTextField.getText());
+                motorista.setCpf(cpfTextField.getText());
+                motorista.setTelefone(telefoneTextField.getText());
+                Date convertedValidadeCnh = Date.from(Instant.from(validadeCnhDatePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
+                motorista.setValidadeCnh(convertedValidadeCnh);
+                motoristaService.updateMotorista(motorista);
+                successMessage = "O motorista foi atualizado.";
+            }
+
+            // TODO: Make following messages parametrizable by a properties file
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, successMessage);
+            successAlert.setHeaderText("Sucesso!");
+            successAlert.setTitle("Aviso");
+            successAlert.showAndWait();
+
+            closeDriverFrame();
+        } catch (IllegalArgumentException e) {
+            // TODO: Make following messages parametrizable by a properties file
+            Alert warnAlert = new Alert(Alert.AlertType.WARNING, e.getMessage());
+            warnAlert.setHeaderText("Cuidado!");
+            warnAlert.setTitle("Ops...");
+            warnAlert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace(); // TODO: Change for SLF4J implementation
+        }
+    }
+
+    @FXML
+    private void closeDriverFrame() {
+        driverPanel.getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void handleRemoveButtonAction() {
+        try {
+            if (motorista != null && motorista.getId() != null) {
+                motoristaService.removeMotorista(motorista);
+
+                // TODO: Make following messages parametrizable by a properties file
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "O motorista foi removido.");
+                successAlert.setHeaderText("Sucesso!");
+                successAlert.setTitle("Aviso");
+                successAlert.showAndWait();
+            } else {
+                // TODO: Make following messages parametrizable by a properties file
+                Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Não foi possível remover o motorista.");
+                warnAlert.setHeaderText("Erro!");
+                warnAlert.setTitle("Ops...");
+                warnAlert.showAndWait();
+            }
+
+            closeDriverFrame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
