@@ -38,8 +38,8 @@ public class SearchManagerController implements Initializable {
         managerTableView.setEditable(true);
 
         managerNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
-        managerCpfTableColumn.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        managerPhoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        managerCpfTableColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        managerPhoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
         managerTableView.setItems(searchManagerService.getManagerList());
         managerChoiceBox.getItems().addAll(NOME_COMPLETO, CPF, TELEFONE);

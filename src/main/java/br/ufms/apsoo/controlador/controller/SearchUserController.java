@@ -38,8 +38,8 @@ public class SearchUserController implements Initializable {
         userTableView.setEditable(true);
 
         userNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
-        userCpfTableColumn.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        userPhoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        userCpfTableColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        userPhoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
         userTableView.setItems(searchUserService.getUserList());
         userChoiceBox.getItems().addAll(NOME_COMPLETO, CPF, TELEFONE);
